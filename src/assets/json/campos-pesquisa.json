@@ -1,0 +1,5 @@
+[
+   { "id": "1", "campo": "matricula", "nome": "Matrícula" },
+   { "id": "2", "campo": "nomeCompleto", "nome": "Nome Completo" },
+   { "id": "3", "campo": "titulo", "nome": "Título eleitoral" }
+]

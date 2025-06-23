@@ -1,0 +1,64 @@
+<div class="wrapper">
+  <div id="formContent">
+    <div class="first">
+      <img src="/assets/images/logo-tre-ba.png" alt="Logo TRE-BA" />
+    </div>
+
+    <div class="content">
+      <form [formGroup]="form" (ngSubmit)="login()">
+        <div id="recomenda-lv">
+          <p>Recomenda Local de votação</p>
+        </div>
+
+        <!-- Campo de Usuário -->
+        <div class="form-group">
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Usuário"
+            maxlength="30"
+            formControlName="login"
+            required
+          />
+          <div *ngIf="form.get('login').invalid && form.get('login').touched">
+            <small class="text-danger">O campo Usuário é obrigatório.</small>
+          </div>
+        </div>
+
+        <!-- Campo de Senha -->
+        <div class="form-group">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Senha"
+            maxlength="20"
+            formControlName="password"
+            required
+          />
+          <div
+            *ngIf="form.get('password').invalid && form.get('password').touched"
+          >
+            <small class="text-danger">O campo Senha é obrigatório.</small>
+          </div>
+        </div>
+
+        <!-- Botão de Login -->
+        <input type="submit" name="login" value="Entrar" />
+
+        <!-- Mensagem de Erro Global -->
+        <div id="formFooter" *ngIf="error">
+          <p class="dados-incorretos mt-0">{{ mensagem }}</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="footer footer-bottom">
+  <img src="/assets/images/brasao-tre-sem-fundo.png" alt="Brasão TRE-BA" />
+  <div color="primary">
+    Sistema Recomenda Local de votação - (Versão {{ version }})
+  </div>
+</div>

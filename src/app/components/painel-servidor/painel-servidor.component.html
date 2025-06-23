@@ -1,0 +1,64 @@
+<app-header></app-header>
+
+<!-- Container principal -->
+<div class="container mt-4">
+
+  <!-- Cabeçalho com título e botão -->
+  <div class="d-flex justify-content-between align-items-center">
+    <h4 class="text-primary mb-0">Painel do {{ nomeServidor }}</h4>
+    <button class="btn btn-outline-primary btn-sm" routerLink="/automacoes">
+      <i class="bi bi-arrow-left-circle me-1"></i> Voltar
+    </button>
+  </div>
+  <hr />
+
+  <!-- Fila de automações -->
+  <h5 class="text-success">Fila de Automações</h5>
+  <ul class="list-group mb-4">
+    <li *ngFor="let item of fila" class="list-group-item d-flex justify-content-between align-items-center">
+      {{ item.robo }}
+      <span class="badge bg-secondary">{{ item.status }}</span>
+    </li>
+  </ul>
+
+  <!-- Logs em tempo real -->
+  <h5 class="text-info">Logs em Tempo Real</h5>
+  <div class="bg-light p-3 border rounded mb-4" style="height: 200px; overflow-y: auto;">
+    <div *ngFor="let log of logsAtivos">{{ log }}</div>
+  </div>
+
+  <!-- Histórico -->
+  <h5 class="text-dark">Histórico de Automações</h5>
+  <table class="table table-bordered table-hover">
+    <thead class="table-primary">
+      <tr>
+        <th>Robô</th>
+        <th>Status</th>
+        <th>Data</th>
+        <th>Logs</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of historico">
+        <td>{{ item.robo }}</td>
+        <td>
+          <span [ngClass]="{
+            'text-success': item.status === 'Concluído',
+            'text-danger': item.status === 'Erro'
+          }">
+            {{ item.status }}
+          </span>
+        </td>
+        <td class="text-center">{{ item.data }}</td>
+        <td class="text-center">
+            <button class="btn btn-outline-primary btn-sm" (click)="baixarLogs(item.logs)">
+              ⬇ Baixar Logs
+            </button>
+          </td>       
+      </tr>
+    </tbody>
+  </table>
+
+</div> <!-- Fim do container -->
+
+<app-footer></app-footer>

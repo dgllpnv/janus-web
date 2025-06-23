@@ -1,0 +1,138 @@
+@charset "UTF-8";
+
+@media only screen and (max-width: 480px) {
+  body {
+    font-size: 13px !important;
+  }
+
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"] {
+    width: 70% !important;
+    padding: 15px 60px !important;
+  }
+
+  .first img {
+    width: 90%;
+  }
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  min-height: 94%;
+}
+
+.first {
+  background-color: #005e7a;
+  padding: 5%;
+}
+
+.content {
+  margin-top: 2.5rem;
+}
+
+#formContent {
+  border-radius: 10px 10px 10px 10px;
+  background: #fff;
+  padding: 30px;
+  width: 90%;
+  max-width: 450px;
+  position: relative;
+  padding: 0px;
+  box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+#formFooter {
+  background-color: #f6f6f6;
+  border-top: 1px solid #dce8f1;
+  padding: 10px;
+  text-align: center;
+  border-radius: 0 0 10px 10px;
+}
+
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  background-color: #005e7a;
+  box-shadow: #005e7a 0px 10px 28px -12px;
+  border: none;
+  color: white;
+  padding: 15px 80px;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 13px;
+  border-radius: 5px;
+  margin: 15px 20px 20px 20px;
+  transition: all 0.3s ease-in-out;
+  width: 60%;
+  margin-top: 2.5rem;
+}
+
+input[type="button"]:active,
+input[type="submit"]:active,
+input[type="reset"]:active,
+button:active {
+  transform: scale(0.95);
+}
+
+input[type="text"],
+input[type="file"],
+input[type="tel"] {
+  background-color: #f6f6f6;
+  border: none;
+  color: #0d0d0d;
+  padding: 15px 32px;
+  text-align: center;
+  font-size: 13px;
+  margin: 5px;
+  width: 70%;
+  border: 2px solid #f6f6f6;
+  transition: all 0.5s ease-in-out;
+  border-radius: 5px;
+}
+
+input[type="text"]:focus,
+input[type="file"]:focus,
+input[type="tel"]:focus {
+  border: 2px solid rgba(0, 82, 158, 0.8);
+}
+
+input[type="text"]:placeholder,
+input[type="file"]:placeholder,
+input[type="tel"]:placeholder {
+  color: #cccccc;
+}
+
+.dados-incorretos {
+  margin: 10px 0;
+  color: red;
+  font-size: 0.9rem;
+}
+
+.logo {
+  max-width: 95%;
+  height: auto;
+  display: inline;
+}
+
+div.footer {
+  width: 100%;
+  text-align: center;
+  font-size: 0.9rem;
+  color: white;
+  padding: 10px 0;
+  background-image: url("/assets/images/bg-topo-principal.png");
+  background-repeat: no-repeat;
+  background-position: right top;
+}
+
+div.footer img {
+  height: 16px;
+  display: block;
+  margin: 0 auto;
+}

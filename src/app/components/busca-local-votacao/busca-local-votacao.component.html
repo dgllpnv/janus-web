@@ -1,0 +1,110 @@
+<div class="wrapper">
+  <div id="formContent">
+    <div class="first">
+      <img src="/assets/images/logo-tre-ba.png" alt="Logo TRE-BA" />
+    </div>
+
+    <div class="content">
+      <form (ngSubmit)="onSearch()">
+        <div class="form-group">
+          <input
+            type="text"
+            placeholder="Digite o CEP"
+            [(ngModel)]="cep"
+            name="cep"
+            (blur)="onCepChange()"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <input
+            type="text"
+            placeholder="Endereço"
+            [(ngModel)]="endereco"
+            name="endereco"
+            readonly
+          />
+        </div>
+
+        <div class="form-group">
+          <input
+            type="text"
+            placeholder="Número da Residência"
+            [(ngModel)]="numero"
+            name="numero"
+            required
+          />
+        </div>
+        <input type="submit" value="Pesquisar" [disabled]="isLoading" />
+      </form>
+
+      <!-- Indicador de carregamento -->
+      <div *ngIf="isLoading" class="loading-indicator">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Carregando...</span>
+        </div>
+        <span class="loading-text">Obtendo locais de votação e calculando distâncias...</span>
+      </div>
+
+      <!-- Mensagem de erro -->
+      <div *ngIf="errorMessage" class="alert alert-warning mt-3">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Tabela de resultados -->
+      <table *ngIf="results.length > 0" class="table table-striped mt-4">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nome do Local</th>
+            <th>Endereço</th>
+            <th>Zona</th>
+            <th>Vagas</th>
+            <th>Distância</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let local of results; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ local.nome }}</td>
+            <td>{{ local.endereco }}</td>
+            <td>{{ local.numeroZona }}</td>
+            <td>{{ local.vagas }}</td>
+            <td>
+              {{ local.distancia != null ? local.distancia.toFixed(2) + ' km' : 'N/D' }}
+            </td>
+            <td>
+              <a [href]="local.mapaLink" target="_blank" class="btn btn-sm btn-primary">
+                <i class="fa fa-map-marker"></i> Ver no mapa
+              </a>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="7" class="rodape-tabela">
+              Listados apenas os locais com vagas. O número na tabela corresponde ao marcador no mapa.
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <!-- Mapa -->
+      <div id="map" style="height: 500px; width: 100%; margin-top: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);"></div>
+      
+      <!-- Legenda do mapa -->
+      <div *ngIf="results.length > 0" class="map-legend mt-2">
+        <div class="legend-item">
+          <div class="marker-blue"></div>
+          <span>Seu endereço</span>
+        </div>
+        <div class="legend-item">
+          <div class="marker-red"></div>
+          <span>Locais de votação</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
