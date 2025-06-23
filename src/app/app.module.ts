@@ -11,50 +11,33 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 // Módulos Bootstrap
 import { NgbModule, NgbPaginationModule, NgbAlertModule } from "@ng-bootstrap/ng-bootstrap";
 
-// Máscaras e Pipes
+// Máscaras (opcional, se usar)
 import { NgxMaskDirective, NgxMaskPipe } from "ngx-mask";
 
 // Locale para Português do Brasil
 import ptBr from "@angular/common/locales/pt";
 import { registerLocaleData } from "@angular/common";
 
-// Componentes
-import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
-import { HomeComponent } from "./components/home/home.component";
-import { BuscaLocalVotacaoComponent } from "./components/busca-local-votacao/busca-local-votacao.component";
-import { SendPdfComponent } from "./components/send-pdf/send-pdf.component";
+// Componentes utilizados no JANUS WEB
 import { HeaderComponent } from "./components/header/header.component";
 import { FooterComponent } from "./components/footer/footer.component";
-import { ConfirmationDialogComponent } from "./components/confirmation-dialog/confirmation-dialog.component";
-import { ModalIniciarAutomacaoComponent } from './components/modal-iniciar-automacao/modal-iniciar-automacao.component';
-import { PainelServidorComponent } from './components/painel-servidor/painel-servidor.component';
-import { DashboardAutomacoesComponent } from './components/dashboard-automacoes/dashboard-automacoes.component';
+import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
+import { ModalIniciarAutomacaoComponent } from "./components/modal-iniciar-automacao/modal-iniciar-automacao.component";
+import { PainelServidorComponent } from "./components/painel-servidor/painel-servidor.component";
+import { DashboardAutomacoesComponent } from "./components/dashboard-automacoes/dashboard-automacoes.component";
 
-// Diretivas e Pipes
-import { BackButtonDirective } from "./directives/back-button.directive";
-import { SimNaoPipe } from "./helpers/pipes/sim-nao.pipe";
-
-// Serviços
-import { LocalVotacaoService } from "./service/local-votacao.service";
-
-// Registro de Locale para pt-BR
+// Registro de Locale
 registerLocaleData(ptBr);
 
 @NgModule({
   declarations: [
     AppComponent,
-    PageNotFoundComponent,
-    HomeComponent,
-    SendPdfComponent,
     HeaderComponent,
     FooterComponent,
-    ConfirmationDialogComponent,
-    BackButtonDirective,
-    SimNaoPipe,
-    BuscaLocalVotacaoComponent,
+    PageNotFoundComponent,
     ModalIniciarAutomacaoComponent,
     PainelServidorComponent,
-    DashboardAutomacoesComponent, // <-- ADICIONADO
+    DashboardAutomacoesComponent
   ],
   imports: [
     BrowserModule,
@@ -67,18 +50,16 @@ registerLocaleData(ptBr);
     NgxMaskDirective,
     NgxMaskPipe,
     RouterModule.forRoot([
-      { path: "busca-local-votacao", component: BuscaLocalVotacaoComponent },
-      { path: "automacoes", component: DashboardAutomacoesComponent }, // <-- ADICIONADO
-      { path: "servidor/:nome", component: PainelServidorComponent },   // <-- ADICIONADO
-      { path: "", redirectTo: "automacoes", pathMatch: "full" }, // ou "busca-local-votacao" se preferir
+      { path: "automacoes", component: DashboardAutomacoesComponent },
+      { path: "servidor/:nome", component: PainelServidorComponent },
+      { path: "", redirectTo: "automacoes", pathMatch: "full" },
       { path: "**", component: PageNotFoundComponent },
-    ]),
+    ])
   ],
   providers: [
     { provide: LOCALE_ID, useValue: "pt" },
     { provide: DEFAULT_CURRENCY_CODE, useValue: "BRL" },
-    LocalVotacaoService,
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
