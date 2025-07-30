@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 // Função utilitária para gerar sessionId único (melhore usando UUID em produção)
 function gerarSessionId() {
@@ -40,7 +41,7 @@ export class LoginPjeComponent {
     this.execution = '';
     this.etapa = 'inicio';
 
-    this.http.get<any>(`/api/pje/iniciar-login?sessionId=${this.sessionId}`)
+    this.http.get<any>(`${environment.apiUrl}/api/pje/iniciar-login?sessionId=${this.sessionId}`)
       .subscribe(res => {
         this.viewState = res.viewState;
         this.logs.push('✅ Sessão iniciada. Informe seu login e senha.');
@@ -58,7 +59,7 @@ export class LoginPjeComponent {
     this.loading = true;
 
     this.http.post<any>(
-      `/api/pje/autenticar?sessionId=${this.sessionId}`,
+      `${environment.apiUrl}/api/pje/autenticar?sessionId=${this.sessionId}`,
       {
         login: this.login,
         senha: this.senha,
@@ -69,7 +70,7 @@ export class LoginPjeComponent {
         this.logs.push('📩 Código de verificação solicitado. Aguarde o e-mail.');
 
         // Busca action/execution para o Keycloak
-        this.http.get<any>(`/api/pje/capturar-keycloak?sessionId=${this.sessionId}&redirectUrl=${encodeURIComponent(res.redirectUrl)}`)
+        this.http.get<any>(`${environment.apiUrl}/api/pje/capturar-keycloak?sessionId=${this.sessionId}&redirectUrl=${encodeURIComponent(res.redirectUrl)}`)
           .subscribe(resp => {
             this.action = resp.action;
             this.execution = resp.execution;
@@ -102,7 +103,7 @@ export class LoginPjeComponent {
     this.loading = true;
 
     this.http.post<any>(
-      `/api/pje/enviar-otp?sessionId=${this.sessionId}`,
+      `${environment.apiUrl}/api/pje/enviar-otp?sessionId=${this.sessionId}`,
       {
         action: this.action,
         execution: this.execution,
