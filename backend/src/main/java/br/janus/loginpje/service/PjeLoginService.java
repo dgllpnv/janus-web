@@ -6,6 +6,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Service;
 
+import br.janus.loginpje.service.PjeSession;
+
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -13,7 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class PjeLoginService {
 
-    private final Map<String, SessionCookieJar> sessions = new ConcurrentHashMap<>();
+    private final Map<String, PjeSession> sessions = new ConcurrentHashMap<>();
     private final OkHttpClient baseClient = new OkHttpClient.Builder()
             .followRedirects(false)
             .build();
@@ -22,8 +24,8 @@ public class PjeLoginService {
      * Abre a página de login e captura o ViewState.
      */
     public String iniciarSessao(String sessionId) throws IOException {
-        SessionCookieJar jar = new SessionCookieJar();
-        OkHttpClient clientSessao = baseClient.newBuilder().cookieJar(jar).build();
+        PjeSession session = new PjeSession();
+        OkHttpClient clientSessao = baseClient.newBuilder().cookieJar(session.getCookieJar()).build();
 
         Request req = new Request.Builder()
                 .url("https://pje1g-ba.tse.jus.br/pje/login.seam?loginComCertificado=false")
@@ -40,7 +42,8 @@ public class PjeLoginService {
             if (viewState == null || viewState.isEmpty()) {
                 throw new RuntimeException("ViewState não encontrado no HTML.");
             }
-            sessions.put(sessionId, jar);
+            session.setViewState(viewState);
+            sessions.put(sessionId, session);
             return viewState;
         }
     }
@@ -49,9 +52,13 @@ public class PjeLoginService {
      * Envia login e senha e retorna a URL de redirecionamento do PJe.
      */
     public Map<String, String> autenticar(String sessionId, String login, String senha, String viewState) throws IOException {
-        SessionCookieJar jar = sessions.get(sessionId);
-        if (jar == null) throw new RuntimeException("Sessão expirada ou inválida.");
-        OkHttpClient clientSessao = baseClient.newBuilder().cookieJar(jar).build();
+        PjeSession session = sessions.get(sessionId);
+        if (session == null) throw new RuntimeException("Sessão expirada ou inválida.");
+        OkHttpClient clientSessao = baseClient.newBuilder().cookieJar(session.getCookieJar()).build();
+
+        if (viewState == null || viewState.isEmpty()) {
+            viewState = session.getViewState();
+        }
 
         RequestBody form = new FormBody.Builder()
                 .add("loginAplicacao", login)
@@ -87,9 +94,9 @@ public class PjeLoginService {
      * Obtém dados de 2FA do Keycloak se o PJe solicitar.
      */
     public Map<String, String> capturarKeycloak(String redirectUrl, String sessionId) throws IOException {
-        SessionCookieJar jar = sessions.get(sessionId);
-        if (jar == null) throw new RuntimeException("Sessão expirada ou inválida.");
-        OkHttpClient clientSessao = baseClient.newBuilder().cookieJar(jar).build();
+        PjeSession session = sessions.get(sessionId);
+        if (session == null) throw new RuntimeException("Sessão expirada ou inválida.");
+        OkHttpClient clientSessao = baseClient.newBuilder().cookieJar(session.getCookieJar()).build();
 
         Request req = new Request.Builder().url(redirectUrl).get().build();
         try (Response resp = clientSessao.newCall(req).execute()) {
@@ -107,9 +114,9 @@ public class PjeLoginService {
      * Envia o código OTP do 2FA.
      */
     public boolean enviarCodigoOTP(String sessionId, String action, String execution, String otpCode) throws IOException {
-        SessionCookieJar jar = sessions.get(sessionId);
-        if (jar == null) throw new RuntimeException("Sessão expirada ou inválida.");
-        OkHttpClient clientSessao = baseClient.newBuilder().cookieJar(jar).build();
+        PjeSession session = sessions.get(sessionId);
+        if (session == null) throw new RuntimeException("Sessão expirada ou inválida.");
+        OkHttpClient clientSessao = baseClient.newBuilder().cookieJar(session.getCookieJar()).build();
 
         RequestBody formOtp = new FormBody.Builder()
                 .add("otp", otpCode)
