@@ -1,0 +1,26 @@
+/*<FOOTER>*/
+
+div.footer
+{
+    width:100%;    
+    display: table; 
+    text-align: center;    
+    font-size: 0.90rem;    
+    color: white;
+    padding-top: 10px;
+    background-image: url('/assets/images/bg-topo-principal.png');
+    background-repeat: no-repeat;
+	background-attachment: scroll;
+    background-position: right top;
+    padding-bottom: 9px;
+}
+
+div.footer img
+{
+    height:16px;  
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*<FOOTER>*/

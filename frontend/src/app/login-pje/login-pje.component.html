@@ -1,0 +1,58 @@
+<!-- 📁 src/app/components/login-pje/login-pje.component.html -->
+<app-header></app-header>
+
+<div class="container mt-5">
+  <div class="text-center mb-4">
+    <h3 class="text-primary fw-bold">Login no PJe</h3>
+  </div>
+
+  <div class="card p-4 shadow-sm">
+    <!-- Etapa: Início -->
+    <div *ngIf="etapa === 'inicio'" class="text-center">
+      <button class="btn btn-primary" (click)="iniciarLogin()">
+        🔐 Iniciar Login no PJe
+      </button>
+    </div>
+
+    <!-- Etapa: Credenciais -->
+    <div *ngIf="etapa === 'credenciais'">
+      <div class="mb-3">
+        <label for="login" class="form-label">Login</label>
+        <input id="login" [(ngModel)]="login" class="form-control" placeholder="Digite seu login">
+      </div>
+      <div class="mb-3">
+        <label for="senha" class="form-label">Senha</label>
+        <input id="senha" [(ngModel)]="senha" type="password" class="form-control" placeholder="Digite sua senha">
+      </div>
+      <button class="btn btn-success w-100" (click)="enviarCredenciais()">
+        ▶️ Enviar Credenciais
+      </button>
+    </div>
+
+    <!-- Etapa: Código de Verificação -->
+    <div *ngIf="etapa === 'codigo'">
+      <div class="mb-3">
+        <label for="codigo" class="form-label">Código de Verificação (e-mail)</label>
+        <input id="codigo" [(ngModel)]="codigoVerificacao" class="form-control" placeholder="Digite o código recebido">
+      </div>
+      <button class="btn btn-info w-100" (click)="enviarCodigo()">
+        📩 Validar Código
+      </button>
+    </div>
+
+    <!-- Etapa: Finalizado -->
+    <div *ngIf="etapa === 'finalizado'" class="text-center">
+      <h5 class="text-success">✅ Login concluído com sucesso!</h5>
+    </div>
+
+    <!-- Logs -->
+    <div class="mt-4">
+      <h6 class="text-muted">Logs:</h6>
+      <div class="bg-light p-3 border rounded" style="height: 200px; overflow-y: auto; font-family: monospace; font-size: 0.9rem;">
+        <div *ngFor="let log of logs">{{ log }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

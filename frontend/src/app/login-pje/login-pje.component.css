@@ -1,0 +1,53 @@
+.container {
+  max-width: 500px;
+}
+
+h3 {
+  font-weight: bold;
+  color: #005e7a;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+
+.form-label {
+  font-weight: 600;
+  color: #333;
+}
+
+input.form-control {
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+button {
+  font-weight: 600;
+}
+
+button.btn-primary,
+button.btn-success,
+button.btn-info {
+  border-radius: 6px;
+}
+
+button:focus {
+  box-shadow: none;
+}
+
+.bg-light {
+  background-color: #f8f9fa !important;
+}
+
+.logs-terminal {
+  height: 200px;
+  overflow-y: auto;
+  font-family: monospace;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #f4f4f4;
+  padding: 12px;
+}

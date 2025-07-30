@@ -1,0 +1,2245 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+.gitignore
+.npmrc
+angular.json
+Dockerfile
+nginx.conf
+package.json
+proxy.config.json
+README.md
+src/app/app.component.html
+src/app/app.component.spec.ts
+src/app/app.component.ts
+src/app/app.module.ts
+src/app/components/base-component-list.ts
+src/app/components/base-component.ts
+src/app/components/dashboard-automacoes/dashboard-automacoes.component.css
+src/app/components/dashboard-automacoes/dashboard-automacoes.component.html
+src/app/components/dashboard-automacoes/dashboard-automacoes.component.spec.ts
+src/app/components/dashboard-automacoes/dashboard-automacoes.component.ts
+src/app/components/footer/footer.component.css
+src/app/components/footer/footer.component.html
+src/app/components/footer/footer.component.ts
+src/app/components/header/header.component.css
+src/app/components/header/header.component.html
+src/app/components/header/header.component.ts
+src/app/components/modal-iniciar-automacao/modal-iniciar-automacao.component.css
+src/app/components/modal-iniciar-automacao/modal-iniciar-automacao.component.html
+src/app/components/modal-iniciar-automacao/modal-iniciar-automacao.component.spec.ts
+src/app/components/modal-iniciar-automacao/modal-iniciar-automacao.component.ts
+src/app/components/page-not-found/page-not-found.component.css
+src/app/components/page-not-found/page-not-found.component.html
+src/app/components/page-not-found/page-not-found.component.ts
+src/app/components/painel-servidor/painel-servidor.component.css
+src/app/components/painel-servidor/painel-servidor.component.html
+src/app/components/painel-servidor/painel-servidor.component.spec.ts
+src/app/components/painel-servidor/painel-servidor.component.ts
+src/app/constants/app-constants.ts
+src/app/directives/back-button.directive.ts
+src/app/helpers/app-utils.ts
+src/app/helpers/auth.interceptor.ts
+src/app/helpers/pipes/sim-nao.pipe.ts
+src/app/helpers/token-storage.service.ts
+src/app/login-pje/login-pje.component.css
+src/app/login-pje/login-pje.component.html
+src/app/login-pje/login-pje.component.spec.ts
+src/app/login-pje/login-pje.component.ts
+src/app/model/campos-pesquisa.ts
+src/app/model/cracha.ts
+src/app/model/login-credentials.ts
+src/app/model/pagination/content.ts
+src/app/model/pagination/page-root.ts
+src/app/model/pagination/pageable-sort.ts
+src/app/model/pagination/pageable.ts
+src/app/model/pagination/root-sort.ts
+src/app/model/pagination/sort.ts
+src/app/model/toast-event.ts
+src/app/model/usuario.ts
+src/app/service/base-service.ts
+src/app/service/confirmation-dialog-service.ts
+src/app/service/local-votacao.service.ts
+src/app/service/LogService.java
+src/app/service/toast-service.ts
+src/environments/environment.development.ts
+src/environments/environment.ts
+src/index.html
+src/main.ts
+src/styles.css
+tsconfig.app.json
+tsconfig.json
+tsconfig.spec.json
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="src/app/login-pje/login-pje.component.css">
+.container {
+  max-width: 500px;
+}
+
+h3 {
+  font-weight: bold;
+  color: #005e7a;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+
+.form-label {
+  font-weight: 600;
+  color: #333;
+}
+
+input.form-control {
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+button {
+  font-weight: 600;
+}
+
+button.btn-primary,
+button.btn-success,
+button.btn-info {
+  border-radius: 6px;
+}
+
+button:focus {
+  box-shadow: none;
+}
+
+.bg-light {
+  background-color: #f8f9fa !important;
+}
+
+.logs-terminal {
+  height: 200px;
+  overflow-y: auto;
+  font-family: monospace;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #f4f4f4;
+  padding: 12px;
+}
+</file>
+
+<file path="src/app/login-pje/login-pje.component.html">
+<!-- 📁 src/app/components/login-pje/login-pje.component.html -->
+<app-header></app-header>
+
+<div class="container mt-5">
+  <div class="text-center mb-4">
+    <h3 class="text-primary fw-bold">Login no PJe</h3>
+  </div>
+
+  <div class="card p-4 shadow-sm">
+    <!-- Etapa: Início -->
+    <div *ngIf="etapa === 'inicio'" class="text-center">
+      <button class="btn btn-primary" (click)="iniciarLogin()">
+        🔐 Iniciar Login no PJe
+      </button>
+    </div>
+
+    <!-- Etapa: Credenciais -->
+    <div *ngIf="etapa === 'credenciais'">
+      <div class="mb-3">
+        <label for="login" class="form-label">Login</label>
+        <input id="login" [(ngModel)]="login" class="form-control" placeholder="Digite seu login">
+      </div>
+      <div class="mb-3">
+        <label for="senha" class="form-label">Senha</label>
+        <input id="senha" [(ngModel)]="senha" type="password" class="form-control" placeholder="Digite sua senha">
+      </div>
+      <button class="btn btn-success w-100" (click)="enviarCredenciais()">
+        ▶️ Enviar Credenciais
+      </button>
+    </div>
+
+    <!-- Etapa: Código de Verificação -->
+    <div *ngIf="etapa === 'codigo'">
+      <div class="mb-3">
+        <label for="codigo" class="form-label">Código de Verificação (e-mail)</label>
+        <input id="codigo" [(ngModel)]="codigoVerificacao" class="form-control" placeholder="Digite o código recebido">
+      </div>
+      <button class="btn btn-info w-100" (click)="enviarCodigo()">
+        📩 Validar Código
+      </button>
+    </div>
+
+    <!-- Etapa: Finalizado -->
+    <div *ngIf="etapa === 'finalizado'" class="text-center">
+      <h5 class="text-success">✅ Login concluído com sucesso!</h5>
+    </div>
+
+    <!-- Logs -->
+    <div class="mt-4">
+      <h6 class="text-muted">Logs:</h6>
+      <div class="bg-light p-3 border rounded" style="height: 200px; overflow-y: auto; font-family: monospace; font-size: 0.9rem;">
+        <div *ngFor="let log of logs">{{ log }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
+</file>
+
+<file path="src/app/login-pje/login-pje.component.spec.ts">
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { LoginPjeComponent } from './login-pje.component';
+
+describe('LoginPjeComponent', () => {
+  let component: LoginPjeComponent;
+  let fixture: ComponentFixture<LoginPjeComponent>;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [LoginPjeComponent]
+    });
+    fixture = TestBed.createComponent(LoginPjeComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+</file>
+
+<file path="src/app/login-pje/login-pje.component.ts">
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+// Função utilitária para gerar um sessionId único
+function gerarSessionId() {
+  return Math.random().toString(36).substring(2, 15) + Date.now().toString();
+}
+
+@Component({
+  selector: 'app-login-pje',
+  templateUrl: './login-pje.component.html',
+  styleUrls: ['./login-pje.component.css']
+})
+export class LoginPjeComponent {
+  etapa: 'inicio' | 'credenciais' | 'codigo' | 'finalizado' = 'inicio';
+  login: string = '';
+  senha: string = '';
+  codigoVerificacao: string = '';
+  logs: string[] = [];
+  loading = false;
+
+  // SessionId único
+  sessionId: string = gerarSessionId();
+  // ViewState capturado do backend
+  viewState: string = '';
+  // Dados para o OTP
+  action: string = '';
+  execution: string = '';
+
+  constructor(private http: HttpClient) {}
+
+  iniciarLogin() {
+    this.logs = ['⏳ Conectando ao PJe...'];
+    this.loading = true;
+    this.sessionId = gerarSessionId(); // Novo id a cada tentativa
+
+    this.http.get<any>(`/api/pje/iniciar-login?sessionId=${this.sessionId}`)
+      .subscribe(res => {
+        this.viewState = res.viewState;
+        this.logs.push('✅ Sessão iniciada. Informe seu login e senha.');
+        this.etapa = 'credenciais';
+        this.loading = false;
+      }, err => {
+        this.logs.push('❌ Erro ao conectar no PJe: ' + err.message);
+        this.loading = false;
+      });
+  }
+
+  enviarCredenciais() {
+    this.logs.push('🔐 Enviando credenciais...');
+    this.loading = true;
+
+    this.http.post<any>(
+      `/api/pje/autenticar?sessionId=${this.sessionId}`,
+      {
+        login: this.login,
+        senha: this.senha,
+        viewState: this.viewState
+      }
+    ).subscribe(res => {
+      // Se backend retornou redirect para Keycloak, chama endpoint para capturar action/execution
+      if (res.redirectUrl && res.redirectUrl.includes('auth')) {
+        this.logs.push('📩 Código de verificação solicitado. Aguarde o e-mail.');
+
+        // Agora buscar action/execution para 2FA (chame o endpoint de Keycloak do backend)
+        this.http.get<any>(`/api/pje/capturar-keycloak?sessionId=${this.sessionId}&redirectUrl=${encodeURIComponent(res.redirectUrl)}`)
+          .subscribe(resp => {
+            this.action = resp.action;
+            this.execution = resp.execution;
+            this.logs.push('➡️ Digite o código recebido por e-mail.');
+            this.etapa = 'codigo';
+            this.loading = false;
+          }, err => {
+            this.logs.push('❌ Falha ao capturar etapa de 2FA: ' + err.message);
+            this.loading = false;
+          });
+
+      } else if (res.sucesso || res.ok) {
+        this.logs.push('✅ Login realizado com sucesso.');
+        this.etapa = 'finalizado';
+        this.loading = false;
+      } else {
+        this.logs.push('❌ Falha de login: ' + (res.mensagem || 'Verifique credenciais.'));
+        this.loading = false;
+      }
+    }, err => {
+      this.logs.push('❌ Falha na autenticação: ' + (err.error?.mensagem || err.message));
+      this.loading = false;
+    });
+  }
+
+  enviarCodigo() {
+    this.logs.push('📥 Enviando código de verificação...');
+    this.loading = true;
+
+    this.http.post<any>(
+      `/api/pje/enviar-otp?sessionId=${this.sessionId}`,
+      {
+        action: this.action,
+        execution: this.execution,
+        otp: this.codigoVerificacao
+      }
+    ).subscribe(res => {
+      if (res.sucesso) {
+        this.logs.push('✅ Login finalizado com sucesso.');
+        this.etapa = 'finalizado';
+      } else {
+        this.logs.push('❌ Código inválido. Verifique seu e-mail e tente novamente.');
+      }
+      this.loading = false;
+    }, err => {
+      this.logs.push('❌ Erro ao validar código: ' + (err.error?.mensagem || err.message));
+      this.loading = false;
+    });
+  }
+}
+</file>
+
+<file path="src/app/model/login-credentials.ts">
+export interface LoginCredentials {
+    login: string;
+    password: string;
+  }
+</file>
+
+<file path=".gitignore">
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# Compiled output
+/dist
+/tmp
+/out-tsc
+/bazel-out
+
+# Node
+/node_modules
+npm-debug.log
+yarn-error.log
+
+# IDEs and editors
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# Miscellaneous
+/.angular/cache
+.sass-cache/
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
+
+# System files
+.DS_Store
+Thumbs.db
+</file>
+
+<file path=".npmrc">
+registry=https://registry.npmjs.org/
+</file>
+
+<file path="angular.json">
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "aplicacao-front": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/aplicacao-front",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "tsconfig.app.json",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/bootstrap/scss/bootstrap.scss",
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+              "src/styles.css"
+            ],
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "aplicacao-front:build:production"
+            },
+            "development": {
+              "browserTarget": "aplicacao-front:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "aplicacao-front:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "tsconfig.spec.json",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": false
+  }
+}
+</file>
+
+<file path="Dockerfile">
+#stage 1
+FROM gitlab.tre-ba.jus.br:5050/sistemas/docker-images/node18 as node
+WORKDIR /app
+COPY . .
+RUN npm install
+RUN npm run build
+
+### STAGE 2: Run ###
+FROM gitlab.tre-ba.jus.br:5050/sistemas/docker-images/nginx
+RUN rm /etc/nginx/conf.d/default.conf
+COPY --from=node /app/dist/aplicacao-front /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80
+</file>
+
+<file path="nginx.conf">
+server {
+    location / {
+        root /usr/share/nginx/html;
+        try_files $uri $uri/ /index.html;
+    }
+}
+</file>
+
+<file path="package.json">
+{
+  "name": "aplicacao-front",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve --open  --host 0.0.0.0 --proxy-config proxy.config.json",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^16.1.1",
+    "@angular/common": "^16.1.1",
+    "@angular/compiler": "^16.1.1",
+    "@angular/core": "^16.1.1",
+    "@angular/forms": "^16.1.1",
+    "@angular/google-maps": "^16.1.0",
+    "@angular/platform-browser": "^16.1.1",
+    "@angular/platform-browser-dynamic": "^16.1.1",
+    "@angular/router": "^16.1.1",
+    "@ng-bootstrap/ng-bootstrap": "^15.0.1",
+    "@popperjs/core": "^2.11.6",
+    "bootstrap": "^5.2.3",
+    "bootstrap-icons": "^1.10.5",
+    "leaflet": "^1.9.4",
+    "ngx-mask": "^16.1.8",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "uikit": "^3.23.11",
+    "zone.js": "~0.13.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^16.1.0",
+    "@angular/cli": "~16.1.0",
+    "@angular/compiler-cli": "^16.1.1",
+    "@angular/localize": "^16.1.1",
+    "@types/google.maps": "^3.58.1",
+    "@types/jasmine": "~4.3.0",
+    "jasmine-core": "~4.6.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.0.0",
+    "typescript": "~5.0.2",
+    "webpack": "^5.87.0",
+    "webpack-cli": "^5.1.4"
+  }
+}
+</file>
+
+<file path="proxy.config.json">
+{
+  "/api": {
+    "target": "http://localhost:8081",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}
+</file>
+
+<file path="README.md">
+# Template Angular Project
+
+
+
+## Getting started
+
+To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+
+Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+
+## Add your files
+
+- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
+- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+
+```
+cd existing_repo
+git remote add origin http://gitlab.tre-ba.jus.br/sistemas/template-angular-project.git
+git branch -M main
+git push -uf origin main
+```
+
+## Integrate with your tools
+
+- [ ] [Set up project integrations](http://gitlab.tre-ba.jus.br/sistemas/template-angular-project/-/settings/integrations)
+
+## Collaborate with your team
+
+- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
+- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
+- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
+- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
+- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+
+## Test and Deploy
+
+Use the built-in continuous integration in GitLab.
+
+- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
+- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
+- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
+- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
+- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+
+***
+
+# Editing this README
+
+When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+
+## Suggestions for a good README
+Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+
+## Name
+Choose a self-explaining name for your project.
+
+## Description
+Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+
+## Badges
+On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+
+## Visuals
+Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+
+## Installation
+Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+
+## Usage
+Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+
+## Support
+Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+
+## Roadmap
+If you have ideas for releases in the future, it is a good idea to list them in the README.
+
+## Contributing
+State if you are open to contributions and what your requirements are for accepting them.
+
+For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+
+You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+
+## Authors and acknowledgment
+Show your appreciation to those who have contributed to the project.
+
+## License
+For open source projects, say how it is licensed.
+
+## Project status
+If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+</file>
+
+<file path="src/app/app.component.html">
+<router-outlet></router-outlet>
+</file>
+
+<file path="src/app/app.component.spec.ts">
+import { TestBed } from '@angular/core/testing';
+import { AppComponent } from './app.component';
+
+describe('AppComponent', () => {
+  beforeEach(() => TestBed.configureTestingModule({
+    declarations: [AppComponent]
+  }));
+
+  it('should create the app', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app).toBeTruthy();
+  });
+
+  it(`should have as title 'terceirizados-front'`, () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app.title).toEqual('terceirizados-front');
+  });
+
+  it('should render title', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('.content span')?.textContent).toContain('terceirizados-front app is running!');
+  });
+});
+</file>
+
+<file path="src/app/app.component.ts">
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'crachas-front';
+}
+</file>
+
+<file path="src/app/components/base-component-list.ts">
+import { OnDestroy, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { BaseService } from '../service/base-service';
+import { Injectable } from '@angular/core';
+import { ToastService } from '../service/toast-service';
+import { Subject, takeUntil } from 'rxjs';
+
+@Injectable({
+    providedIn: 'root'
+})
+export abstract class BaseComponentList<T> implements OnInit, OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
+  entities: T[] = [];
+  entitiesFiltrada: T[] = [];
+  filter = new FormControl('');
+  page = 1;
+  pageSize = 10;
+  collectionSize = 0;
+
+  constructor(protected service: BaseService<T>,
+    protected toastService: ToastService) {}
+  
+  ngOnInit(): void {
+    this.buscarEntities();
+  }
+
+  buscarEntities() {
+    this.service.getAllEntities()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
+      next: entities => { 
+       // console.log(entities);
+        this.entities = entities;
+        this.collectionSize = this.entities.length;
+        this.refresh();
+      },
+      error: error =>  { 
+        this.toastService.showErrorToast('Erro', "Não foi possível obter os registros.")
+      }
+    });
+  }
+
+  refresh() {
+    this.entitiesFiltrada = this.entities
+      .map((entity, i) => ({id: i + 1, ...entity}))
+      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+  }
+
+  ngOnDestroy(): void {    
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
+  }
+}
+</file>
+
+<file path="src/app/components/base-component.ts">
+import { OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { BaseService } from '../service/base-service';
+import { Injectable } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import AppUtils from '../helpers/app-utils';
+import { ToastService } from '../service/toast-service';
+import { Subject, takeUntil } from 'rxjs';
+
+@Injectable({
+    providedIn: 'root'
+})
+export abstract class BaseComponent<T> implements OnInit, OnDestroy {
+
+  destroy$: Subject<boolean> = new Subject<boolean>();
+  form: FormGroup;
+  entity = {} as T;  
+  filter = new FormControl('');
+
+  constructor(protected service: BaseService<T>,
+    protected router: Router,
+    protected toastService: ToastService,
+    protected pathToRedirect: string) {}
+  
+  ngOnInit(): void {
+  }
+
+  salvarEntity(entity: T) {
+    if (this.form.valid) {        
+        this.service.postEntity(entity)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: x => { 
+            this.toastService.showSuccessToast('Sucesso', 'Informação salva com sucesso.');
+            this.router.navigate([this.pathToRedirect]);
+          },
+          error: erro => this.toastService.showErrorToast('Erro', 'Não foi possível salvar a informação.')
+        });
+    } else {
+        AppUtils.findInvalidControlsRecursive(this.form);
+    }
+  }
+ 
+  ngOnDestroy(): void {    
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
+  }
+}
+</file>
+
+<file path="src/app/components/dashboard-automacoes/dashboard-automacoes.component.css">
+.button-home {
+    width: 220px;
+    min-height: 260px;
+    background-color: #005e7a;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+    transition: transform 0.3s ease;
+    cursor: default;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+ 
+  .janus-banner {
+    margin-top: 20px;
+    margin-bottom: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+  }
+ 
+  .janus-titulo {
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: #005e7a;
+    margin: 0;
+    padding: 0;
+  }
+</file>
+
+<file path="src/app/components/dashboard-automacoes/dashboard-automacoes.component.html">
+<app-header></app-header>
+<div class="janus-banner">
+    <h1 class="janus-titulo">JANUS WEB</h1>
+  </div>
+  
+<div class="altura-home d-flex align-items-center justify-content-center flex-wrap">
+  <div
+    *ngFor="let servidor of servidores"
+    class="button-home m-3 text-center"
+  >
+    <div class="font-icon-button mb-2">
+      <i class="bi bi-hdd-network"></i>
+    </div>
+    <div><strong>{{ servidor.nome }}</strong></div>
+    <div class="text-white mt-1">Status: {{ servidor.status }}</div>
+    <div class="text-white">Tarefas: {{ servidor.tarefas }}</div>
+
+    <div class="mt-3">
+        <button class="btn btn-outline-light btn-sm w-100 mb-2" (click)="visualizarPainelServidor(servidor)">
+          📊 Ver Painel
+        </button>
+        <button class="btn btn-outline-light btn-sm w-100" (click)="iniciarAutomacao()">
+          🤖 Lançar Automação
+        </button>
+      </div>
+     
+  </div>
+</div>
+
+
+<app-footer></app-footer>
+</file>
+
+<file path="src/app/components/dashboard-automacoes/dashboard-automacoes.component.spec.ts">
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { DashboardAutomacoesComponent } from './dashboard-automacoes.component';
+
+describe('DashboardAutomacoesComponent', () => {
+  let component: DashboardAutomacoesComponent;
+  let fixture: ComponentFixture<DashboardAutomacoesComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [DashboardAutomacoesComponent]
+    })
+    .compileComponents();
+
+    fixture = TestBed.createComponent(DashboardAutomacoesComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+</file>
+
+<file path="src/app/components/dashboard-automacoes/dashboard-automacoes.component.ts">
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalIniciarAutomacaoComponent } from '../modal-iniciar-automacao/modal-iniciar-automacao.component';
+
+@Component({
+  selector: 'app-dashboard-automacoes',
+  templateUrl: './dashboard-automacoes.component.html',
+  styleUrls: ['./dashboard-automacoes.component.css']
+})
+export class DashboardAutomacoesComponent implements OnInit {
+  servidores: any[] = [];
+  servidorSelecionado: any = null;
+
+  constructor(
+    private modalService: NgbModal,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    // Mock inicial - será substituído por chamada ao backend
+    this.servidores = [
+      { nome: 'Servidor 01', status: 'online', tarefas: 3 },
+      { nome: 'Servidor 02', status: 'ocupado', tarefas: 5 },
+      { nome: 'Servidor 03', status: 'inativo', tarefas: 0 }
+    ];
+  }
+
+  visualizarPainelServidor(servidor: any): void {
+    this.router.navigate(['/servidor', servidor.nome]);
+  }
+
+  iniciarAutomacao(): void {
+    const modalRef = this.modalService.open(ModalIniciarAutomacaoComponent, {
+      centered: true,
+      backdrop: 'static',
+      size: 'lg'
+    });
+
+    modalRef.result.then((roboSelecionado) => {
+      if (roboSelecionado) {
+        console.log('Automação confirmada:', roboSelecionado);
+      }
+    }).catch(() => {
+      console.log('Modal fechado sem confirmação');
+    });
+  }
+}
+</file>
+
+<file path="src/app/components/footer/footer.component.css">
+/*<FOOTER>*/
+
+div.footer
+{
+    width:100%;    
+    display: table; 
+    text-align: center;    
+    font-size: 0.90rem;    
+    color: white;
+    padding-top: 10px;
+    background-image: url('/assets/images/bg-topo-principal.png');
+    background-repeat: no-repeat;
+	background-attachment: scroll;
+    background-position: right top;
+    padding-bottom: 9px;
+}
+
+div.footer img
+{
+    height:16px;  
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*<FOOTER>*/
+</file>
+
+<file path="src/app/components/footer/footer.component.html">
+<div class="footer footer-bottom">
+    <img src="/assets/images/brasao-tre-sem-fundo.png">
+    <div color="primary">TRE-BA - Tribunal Regional Eleitoral da Bahia</div>
+</div>
+</file>
+
+<file path="src/app/components/footer/footer.component.ts">
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-footer',
+  templateUrl: './footer.component.html',
+  styleUrls: ['./footer.component.css']
+})
+export class FooterComponent {
+
+}
+</file>
+
+<file path="src/app/components/header/header.component.css">
+nav {
+	width: 100%;
+	height: 80px;
+	background-color: #005E7A;
+	background-image: url('/assets/images/bg-topo-principal.png');
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: right top;
+	padding: 8px 16px 8px 16px;
+}
+</file>
+
+<file path="src/app/components/header/header.component.html">
+<nav class="navbar navbar-expand-lg navbar-light">	
+    <a href="home"><img src="/assets/images/logo-tre-ba.png" class="cursor-pointer" /></a>
+    <div class="w-100">
+        <a class="nav-link float-right text-white font-weight-bold cursor-pointer" (click)="logout()">Sair</a>
+    </div>
+</nav>
+</file>
+
+<file path="src/app/components/header/header.component.ts">
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.css']
+})
+export class HeaderComponent implements OnInit {
+
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    // Nenhuma ação necessária no init
+  }
+
+  logout() {  
+    this.router.navigate(['/login']);
+  }
+}
+</file>
+
+<file path="src/app/components/modal-iniciar-automacao/modal-iniciar-automacao.component.css">
+.modal-header {
+    background-color: #005e7a;
+    color: white;
+  }
+  
+  .modal-body {
+    font-size: 14px;
+  }
+  
+  .modal-footer {
+    justify-content: space-between;
+  }
+</file>
+
+<file path="src/app/components/modal-iniciar-automacao/modal-iniciar-automacao.component.html">
+<div class="modal-header">
+    <h5 class="modal-title text-primary">Iniciar Automação</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="cancelar()"></button>
+  </div>
+  
+  <div class="modal-body">
+    <p><strong>Servidor Selecionado:</strong> {{ servidor?.nome }}</p>
+  
+    <div class="form-group">
+      <label for="roboSelect">Escolha o robô:</label>
+      <select class="form-control mt-2" id="roboSelect" [(ngModel)]="roboSelecionado">
+        <option [ngValue]="null" disabled>-- Selecione --</option>
+        <option *ngFor="let robo of robosDisponiveis" [ngValue]="robo">{{ robo.nome }}</option>
+      </select>
+    </div>
+  
+    <div class="mt-3" *ngIf="roboSelecionado">
+      <h6><strong>Descrição do Robô:</strong></h6>
+      <p class="text-muted">{{ roboSelecionado.descricao }}</p>
+    </div>
+  </div>
+  
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+    <button type="button" class="btn btn-primary" [disabled]="!roboSelecionado" (click)="confirmarAutomacao()">Confirmar</button>
+  </div>
+</file>
+
+<file path="src/app/components/modal-iniciar-automacao/modal-iniciar-automacao.component.spec.ts">
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { ModalIniciarAutomacaoComponent } from './modal-iniciar-automacao.component';
+
+describe('ModalIniciarAutomacaoComponent', () => {
+  let component: ModalIniciarAutomacaoComponent;
+  let fixture: ComponentFixture<ModalIniciarAutomacaoComponent>;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [ModalIniciarAutomacaoComponent]
+    });
+    fixture = TestBed.createComponent(ModalIniciarAutomacaoComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+</file>
+
+<file path="src/app/components/modal-iniciar-automacao/modal-iniciar-automacao.component.ts">
+import { Component, Input } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
+@Component({
+  selector: 'app-modal-iniciar-automacao',
+  templateUrl: './modal-iniciar-automacao.component.html',
+  styleUrls: ['./modal-iniciar-automacao.component.css']
+})
+export class ModalIniciarAutomacaoComponent {
+  @Input() servidor: any;
+
+  robosDisponiveis = [
+    { nome: 'Robô Sentença Final', codigo: 'sentenca_final', descricao: 'Lança movimentação 874 após validar minuta e documentos obrigatórios.' },
+    { nome: 'Robô Intimação', codigo: 'intimacao', descricao: 'Gera e envia intimação para as partes via PJe ou e-mail.' },
+    { nome: 'Robô Cálculo Multa', codigo: 'multa', descricao: 'Calcula multa com base nos dados processuais e lança valor.' }
+  ];
+
+  roboSelecionado: any = null;
+
+  constructor(public activeModal: NgbActiveModal) {}
+
+  confirmarAutomacao() {
+    if (this.roboSelecionado) {
+      console.log('Lançar automação', {
+        servidor: this.servidor.nome,
+        robo: this.roboSelecionado
+      });
+      this.activeModal.close(this.roboSelecionado);
+    }
+  }
+
+  cancelar() {
+    this.activeModal.dismiss();
+  }
+}
+</file>
+
+<file path="src/app/components/page-not-found/page-not-found.component.css">
+.altura-pagina {
+    min-height:calc(90vh - 40px);
+}
+
+.margin-negativa-5 {
+    margin-left: -5%;
+}
+</file>
+
+<file path="src/app/components/page-not-found/page-not-found.component.html">
+<app-header></app-header>
+<div class="altura-home text-center pt-4">
+    <img class="mt-4 margin-negativa-5" src="/assets/images/brasao-tre-sem-fundo.png" />
+    <h1 class="text-center pt-4">Página não encontrada.</h1>
+</div>
+<app-footer></app-footer>
+</file>
+
+<file path="src/app/components/page-not-found/page-not-found.component.ts">
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-page-not-found',
+  templateUrl: './page-not-found.component.html',
+  styleUrls: ['./page-not-found.component.css']
+})
+export class PageNotFoundComponent {
+
+}
+</file>
+
+<file path="src/app/components/painel-servidor/painel-servidor.component.css">
+.container {
+    max-width: 960px;
+  }
+</file>
+
+<file path="src/app/components/painel-servidor/painel-servidor.component.html">
+<app-header></app-header>
+
+<!-- Container principal -->
+<div class="container mt-4">
+
+  <!-- Cabeçalho com título e botão -->
+  <div class="d-flex justify-content-between align-items-center">
+    <h4 class="text-primary mb-0">Painel do {{ nomeServidor }}</h4>
+    <button class="btn btn-outline-primary btn-sm" routerLink="/automacoes">
+      <i class="bi bi-arrow-left-circle me-1"></i> Voltar
+    </button>
+  </div>
+  <hr />
+
+  <!-- Fila de automações -->
+  <h5 class="text-success">Fila de Automações</h5>
+  <ul class="list-group mb-4">
+    <li *ngFor="let item of fila" class="list-group-item d-flex justify-content-between align-items-center">
+      {{ item.robo }}
+      <span class="badge bg-secondary">{{ item.status }}</span>
+    </li>
+  </ul>
+
+  <!-- Logs em tempo real -->
+  <h5 class="text-info">Logs em Tempo Real</h5>
+  <div class="bg-light p-3 border rounded mb-4" style="height: 200px; overflow-y: auto;">
+    <div *ngFor="let log of logsAtivos">{{ log }}</div>
+  </div>
+
+  <!-- Histórico -->
+  <h5 class="text-dark">Histórico de Automações</h5>
+  <table class="table table-bordered table-hover">
+    <thead class="table-primary">
+      <tr>
+        <th>Robô</th>
+        <th>Status</th>
+        <th>Data</th>
+        <th>Logs</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of historico">
+        <td>{{ item.robo }}</td>
+        <td>
+          <span [ngClass]="{
+            'text-success': item.status === 'Concluído',
+            'text-danger': item.status === 'Erro'
+          }">
+            {{ item.status }}
+          </span>
+        </td>
+        <td class="text-center">{{ item.data }}</td>
+        <td class="text-center">
+            <button class="btn btn-outline-primary btn-sm" (click)="baixarLogs(item.logs)">
+              ⬇ Baixar Logs
+            </button>
+          </td>       
+      </tr>
+    </tbody>
+  </table>
+
+</div> <!-- Fim do container -->
+
+<app-footer></app-footer>
+</file>
+
+<file path="src/app/components/painel-servidor/painel-servidor.component.spec.ts">
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { PainelServidorComponent } from './painel-servidor.component';
+
+describe('PainelServidorComponent', () => {
+  let component: PainelServidorComponent;
+  let fixture: ComponentFixture<PainelServidorComponent>;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [PainelServidorComponent]
+    });
+    fixture = TestBed.createComponent(PainelServidorComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+</file>
+
+<file path="src/app/components/painel-servidor/painel-servidor.component.ts">
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+@Component({
+  selector: 'app-painel-servidor',
+  templateUrl: './painel-servidor.component.html',
+  styleUrls: ['./painel-servidor.component.css']
+})
+export class PainelServidorComponent implements OnInit {
+  nomeServidor: string = '';
+  fila: any[] = [];
+  historico: any[] = [];
+  logsAtivos: string[] = [];
+
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.nomeServidor = this.route.snapshot.paramMap.get('nome') || 'Servidor Desconhecido';
+
+    // Mock de fila
+    this.fila = [
+      { robo: 'Robô Sentença Final', status: 'Em execução' },
+      { robo: 'Robô Intimação', status: 'Aguardando' }
+    ];
+
+    // Mock de histórico
+    this.historico = [
+      {
+        robo: 'Robô Sentença Final',
+        status: 'Concluído',
+        data: '23/06/2025 09:10',
+        logs: ['[INFO] Execução iniciada', '[INFO] Requisição HTTP enviada', '[INFO] Sucesso']
+      },
+      {
+        robo: 'Robô Cálculo Multa',
+        status: 'Erro',
+        data: '23/06/2025 08:45',
+        logs: ['[INFO] Execução iniciada', '[ERROR] Timeout HTTP', '[INFO] Iniciado fallback', '[ERROR] Falha ao autenticar no PJe']
+      }
+    ];
+
+    // Simulação de logs ativos
+    setInterval(() => {
+      if (this.fila.length > 0 && this.fila[0].status === 'Em execução') {
+        this.logsAtivos.push(`[LOG][${new Date().toLocaleTimeString()}] Robô executando...`);
+      }
+    }, 3000);
+  }
+
+  baixarLogs(logs: string[]) {
+    const blob = new Blob([logs.join('\n')], { type: 'text/plain;charset=utf-8' });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'logs-automacao.txt';
+    link.click();
+    window.URL.revokeObjectURL(url);
+  }
+}
+</file>
+
+<file path="src/app/constants/app-constants.ts">
+export abstract class AppConstants {     
+     static readonly HOME_PATH = "/home";
+     static readonly SERVIDOR_PATH = "/servidores";     
+     static readonly AUTH_PATH = "/auth/signin";
+     static readonly CRACHA_PATH = "/crachas";
+     static readonly CRACHA_LIST_PATH = "/crachas-list";
+     static readonly LOGIN_PATH = "/login";     
+     static readonly TOKEN_KEY = "auth-token";
+     static readonly USER_KEY = "auth-user";     
+}
+</file>
+
+<file path="src/app/directives/back-button.directive.ts">
+import { Location } from '@angular/common';
+import { Directive, HostListener } from '@angular/core';
+
+@Directive({
+  selector: '[back-button]'
+})
+export class BackButtonDirective {
+
+  constructor(private _location: Location) { }
+
+  @HostListener('click')
+  onClick() {              
+      this._location.back();
+  }
+
+}
+</file>
+
+<file path="src/app/service/base-service.ts">
+import { HttpClient } from "@angular/common/http";
+import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
+
+const SEPARADOR = "/";
+
+@Injectable({
+    providedIn: 'root'
+})
+export abstract class BaseService<T> {
+
+    basePath = environment.apiUrl;
+
+    constructor(private path: string, 
+        private http: HttpClient) {
+            this.path = this.basePath + this.path;
+        }
+
+    getEntity(id: string) : Observable<T> {
+        return this.http.get<T>(this.path + SEPARADOR + id);
+    }
+
+    getAllEntities() : Observable<T[]> {
+        return this.http.get<T[]>(this.path);
+    }
+
+    postEntity(entity: T) : Observable<T> {
+        return this.http.post<T>(this.path, entity);
+    }
+
+    deleteEntity(id: string) : Observable<T> {
+        return this.http.delete<T>(this.path + SEPARADOR + id);
+    }
+}
+</file>
+
+<file path="src/app/service/confirmation-dialog-service.ts">
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { Injectable } from "@angular/core";
+import { ConfirmationDialogComponent } from "../components/confirmation-dialog/confirmation-dialog.component";
+
+@Injectable()
+export class ConfirmationDialogService {
+
+  constructor(private modalService: NgbModal) { }
+
+  public confirm(
+    title: string,
+    message: string,
+    btnOkText: string = 'OK',
+    btnCancelText: string = 'Cancelar',
+    dialogSize: 'sm'|'lg' = 'sm'): Promise<boolean> {
+    const modalRef = this.modalService.open(ConfirmationDialogComponent, { size: dialogSize });
+    modalRef.componentInstance.title = title;
+    modalRef.componentInstance.message = message;
+    modalRef.componentInstance.btnOkText = btnOkText;
+    modalRef.componentInstance.btnCancelText = btnCancelText;
+
+    return modalRef.result;
+  }
+
+}
+</file>
+
+<file path="src/app/service/local-votacao.service.ts">
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class LocalVotacaoService {
+  private apiUrl = 'http://localhost:8081/api/locations';
+
+  constructor(private http: HttpClient) {}
+
+  validateCep(cep: string): boolean {
+    return /^[0-9]{5}-?[0-9]{3}$/.test(cep);
+  }
+
+  getVotingLocationsFiltered(lat: number, lon: number, zona: number|null, limite: number = 5) {
+    let url = `${this.apiUrl}/proximos?lat=${lat}&lon=${lon}&limite=${limite}`;
+    if (zona !== null && !isNaN(zona)) {
+      url += `&zona=${zona}`;
+    }
+
+    console.log('Realizando requisição para:', url);
+
+    return this.http.get(url).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getZonaByBairro(bairro: string) {
+    const url = `${this.apiUrl}/zona?bairro=${encodeURIComponent(bairro)}`;
+    return this.http.get<number>(url).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  /**
+   * Obter estatísticas de geocodificação por zona eleitoral
+   */
+  getEstatisticasPorZona() {
+    const url = `${this.apiUrl}/estatisticas/zona`;
+    return this.http.get<any[]>(url).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  /**
+   * Obter estatísticas de geocodificação por município
+   */
+  getEstatisticasPorMunicipio() {
+    const url = `${this.apiUrl}/estatisticas/municipio`;
+    return this.http.get<any[]>(url).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  /**
+   * Obter locais de votação sem coordenadas geográficas
+   */
+  getLocaisSemCoordenadas() {
+    const url = `${this.apiUrl}/sem-coordenadas`;
+    return this.http.get<any[]>(url).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  /**
+   * Iniciar geocodificação em massa de todos os locais sem coordenadas
+   */
+  iniciarGeocodificacaoEmMassa() {
+    const url = `${this.apiUrl}/geocodificar-todos`;
+    return this.http.post<any>(url, {}).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    let errorMessage = 'Erro desconhecido.';
+    if (error.error instanceof ErrorEvent) {
+      errorMessage = `Erro: ${error.error.message}`;
+    } else {
+      errorMessage = `Erro no servidor: ${error.status}, mensagem: ${error.message}`;
+    }
+    console.error(errorMessage);
+    return throwError(errorMessage);
+  }
+}
+</file>
+
+<file path="src/app/service/LogService.java">
+package br.jus.treba.aplicacao.service;
+
+import br.jus.treba.aplicacao.model.Log;
+import br.jus.treba.aplicacao.repository.LogRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class LogService {
+
+    @Autowired
+    private LogRepository logRepository;
+
+    public Log salvarLog(Log log) {
+        return logRepository.save(log);
+    }
+}
+</file>
+
+<file path="src/app/service/toast-service.ts">
+import { Injectable } from "@angular/core";
+import { Observable, Subject } from "rxjs";
+import { EventTypes } from "../enums/event-types";
+import { ToastEvent } from "../model/toast-event";
+
+@Injectable({
+    providedIn: 'root',
+  })
+  export class ToastService {
+    toastEvents: Observable<ToastEvent>;
+    private _toastEvents = new Subject<ToastEvent>();
+  
+    constructor() {
+      this.toastEvents = this._toastEvents.asObservable();
+    }
+  
+    showSuccessToast(title: string, message: string) {
+      this._toastEvents.next({
+        message,
+        title,
+        type: EventTypes.Success,
+      });
+    }
+
+    /**
+   * Show info toast notification.
+   * @param title Toast title
+   * @param message Toast message
+   */
+  showInfoToast(title: string, message: string) {
+    this._toastEvents.next({
+      message,
+      title,
+      type: EventTypes.Info,
+    });
+  }
+
+  /**
+   * Show warning toast notification.
+   * @param title Toast title
+   * @param message Toast message
+   */
+  showWarningToast(title: string, message: string) {
+    this._toastEvents.next({
+      message,
+      title,
+      type: EventTypes.Warning,
+    });
+  }
+
+  /**
+   * Show error toast notification.
+   * @param title Toast title
+   * @param message Toast message
+   */
+  showErrorToast(title: string, message: string) {
+    this._toastEvents.next({
+      message,
+      title,
+      type: EventTypes.Error,
+    });
+  }
+  }
+</file>
+
+<file path="src/environments/environment.development.ts">
+export const environment = {
+    production: false,
+    apiUrl: 'http://localhost:8081'
+};
+</file>
+
+<file path="src/environments/environment.ts">
+export const environment = {
+  production: false,
+  apiUrl: "http://localhost:8081",
+};
+</file>
+
+<file path="src/index.html">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Recomenda Local de Votação</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="/assets/images/brasao-tre-sem-fundo.png" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDErM19QviAyqxchLWqV6MLLh6N8nknBr8&libraries=geometry"></script>
+  </head>
+  <body>
+    <app-root></app-root>
+  </body>
+</html>
+</file>
+
+<file path="src/main.ts">
+/// <reference types="@angular/localize" />
+
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+
+import { AppModule } from './app/app.module';
+
+
+platformBrowserDynamic().bootstrapModule(AppModule)
+  .catch(err => console.error(err));
+</file>
+
+<file path="src/styles.css">
+@import "~bootstrap/dist/css/bootstrap.css" ;
+
+/* You can add global styles to this file, and also import other style files */
+@media only screen and (max-width: 600px) {
+    .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
+        margin-top: 0.25rem !important;
+        width: 100%;
+    }
+
+    .row {
+      margin-top: 0rem !important;
+    }
+
+    #labelAcessoRede, #checkAcessoRede {
+        float: left !important;
+    }
+
+    html, body {
+      font-size: 13px !important;      
+    }
+    
+  }
+
+html, body {
+  background-image: url('/assets/images/brasao-azul-trans-4p.png');
+  background-repeat: repeat;
+  height: 100vh;
+}
+
+table thead {
+  background-color: #005E7A !important;
+  text-align: center;
+  color: white;
+}
+
+textarea {
+  resize: none;
+}
+
+.container {
+  min-height:calc(90vh - 48px);
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  padding-left: 0.5rem;
+}
+
+.float-right {
+  float: right !important;
+}
+
+.ml-2 {
+  margin-left: 1rem;
+}
+
+.ml-4 {
+  margin-left: 2rem;
+}
+
+.w-10 {
+  width: 10% !important;
+}
+
+.w-13 {
+  width: 13% !important;
+}
+
+.w-30 {
+  width: 30% !important;
+}
+.w-35 {
+  width: 35% !important;
+}
+
+.footer-bottom {
+  width: 100%;
+  right: 0;
+  bottom: 0;
+  left: 0;  
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.button-primary {
+  background-color: #005E7A !important;
+  border-color: white;
+  width: 94px;
+}
+
+.button-primary:hover {
+  color: var(--bs-btn-hover-color);
+  background-color: #005E7A !important;
+  border-color: var(--bs-btn-hover-border-color);
+}
+
+.font-weight-600 {
+  font-weight: 600 !important;
+}
+
+.table > :not(caption) > * > * {
+  padding: 0.4rem 0.4rem !important;
+}
+
+nav {
+  width: 100%;
+  height: 80px;
+  background-color: #005E7A;
+  background-image: url('/assets/images/bg-topo-principal.png');
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: right top;
+  padding: 8px 16px 8px 16px;
+}
+
+.altura-home {
+  min-height:calc(90vh - 37px);
+}
+</file>
+
+<file path="tsconfig.app.json">
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/app",
+    "types": [
+      "@angular/localize",
+      "google.maps"
+    ]
+  },
+  "files": [
+    "src/main.ts"
+  ],
+  "include": [
+    "src/**/*.d.ts"
+  ]
+}
+</file>
+
+<file path="tsconfig.json">
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": false,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "ES2022",
+    "useDefineForClassFields": false,
+    "lib": [
+      "ES2022",
+      "dom"
+    ]
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}
+</file>
+
+<file path="tsconfig.spec.json">
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/spec",
+    "types": [
+      "jasmine",
+      "@angular/localize"
+    ]
+  },
+  "include": [
+    "src/**/*.spec.ts",
+    "src/**/*.d.ts"
+  ]
+}
+</file>
+
+<file path="src/app/app.module.ts">
+import { NgModule, LOCALE_ID, DEFAULT_CURRENCY_CODE } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { RouterModule } from "@angular/router";
+import { HttpClientModule } from "@angular/common/http";
+
+import { AppComponent } from "./app.component";
+
+// Módulos de Formulários
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+
+// Módulos Bootstrap
+import { NgbModule, NgbPaginationModule, NgbAlertModule } from "@ng-bootstrap/ng-bootstrap";
+
+// Máscaras (opcional, se usar)
+import { NgxMaskDirective, NgxMaskPipe } from "ngx-mask";
+
+// Locale para Português do Brasil
+import ptBr from "@angular/common/locales/pt";
+import { registerLocaleData } from "@angular/common";
+
+// Componentes utilizados no JANUS WEB
+import { HeaderComponent } from "./components/header/header.component";
+import { FooterComponent } from "./components/footer/footer.component";
+import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
+import { ModalIniciarAutomacaoComponent } from "./components/modal-iniciar-automacao/modal-iniciar-automacao.component";
+import { PainelServidorComponent } from "./components/painel-servidor/painel-servidor.component";
+import { DashboardAutomacoesComponent } from "./components/dashboard-automacoes/dashboard-automacoes.component";
+import { LoginPjeComponent } from './login-pje/login-pje.component';
+
+// Registro de Locale
+registerLocaleData(ptBr);
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    FooterComponent,
+    PageNotFoundComponent,
+    ModalIniciarAutomacaoComponent,
+    PainelServidorComponent,
+    DashboardAutomacoesComponent,
+    LoginPjeComponent
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbModule,
+    NgbPaginationModule,
+    NgbAlertModule,
+    NgxMaskDirective,
+    NgxMaskPipe,
+    RouterModule.forRoot([
+      { path: "automacoes", component: DashboardAutomacoesComponent },
+      { path: "servidor/:nome", component: PainelServidorComponent },
+      { path: "login-pje", component: LoginPjeComponent },
+      { path: "", redirectTo: "automacoes", pathMatch: "full" },
+      { path: "**", component: PageNotFoundComponent },
+    ])
+  ],
+  providers: [
+    { provide: LOCALE_ID, useValue: "pt" },
+    { provide: DEFAULT_CURRENCY_CODE, useValue: "BRL" },
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+</file>
+
+<file path="src/app/helpers/app-utils.ts">
+import { FormArray, FormGroup } from "@angular/forms";
+
+export default class AppUtils {
+    
+  public static findInvalidControlsRecursive(formToInvestigate:FormGroup|FormArray) {
+    let recursiveFunc = (form:FormGroup|FormArray) => {
+      Object.keys(form.controls).forEach(field => { 
+        const control = form.get(field);
+        if (control?.invalid) {
+          console.log(control.errors);
+          control.markAsTouched();
+        }
+
+        if (control instanceof FormGroup) {
+          recursiveFunc(control);
+        } else if (control instanceof FormArray) {
+          recursiveFunc(control);
+        }        
+      });
+    }
+    recursiveFunc(formToInvestigate);
+  }
+}
+</file>
+
+<file path="src/app/helpers/auth.interceptor.ts">
+import { HttpErrorResponse, HttpEvent, HttpEventType, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { tap } from "rxjs/operators";
+import { TokenStorageService } from "./token-storage.service";
+import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
+import { AppConstants } from "../constants/app-constants";
+
+const TOKEN_HEADER_KEY = 'Authorization';
+
+@Injectable()
+export class AuthInterceptor implements HttpInterceptor {
+
+    constructor(private tokenService: TokenStorageService,
+        private router: Router) {}
+
+    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        let authReq = req;
+        const token = this.tokenService.getToken();
+
+        if (token != null) {
+            authReq = req.clone({headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token)});
+        }
+        return next.handle(authReq).pipe(
+          tap({
+            error: error => 
+            { 
+                if (error.status === 401) {
+                    this.router.navigate([AppConstants.LOGIN_PATH]);
+                }
+            }            
+          }));
+    }  
+}
+</file>
+
+<file path="src/app/helpers/pipes/sim-nao.pipe.ts">
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'simNao'
+})
+export class SimNaoPipe implements PipeTransform {
+
+  transform(value: unknown, ...args: unknown[]): unknown {
+    return value ? "Sim" : "Não";
+  }
+
+}
+</file>
+
+<file path="src/app/helpers/token-storage.service.ts">
+import { Injectable } from "@angular/core";
+import { AppConstants } from "../constants/app-constants";
+import { Usuario } from "../model/usuario";
+
+
+@Injectable({
+    providedIn: 'root'
+})
+export class TokenStorageService {
+
+    signOut() {
+        window.sessionStorage.clear();
+    }
+
+    saveToken(token: string) {
+        window.sessionStorage.removeItem(AppConstants.TOKEN_KEY);
+        window.sessionStorage.setItem(AppConstants.TOKEN_KEY, token);
+    }
+
+    getToken(): string {
+        return sessionStorage.getItem(AppConstants.TOKEN_KEY);
+    }
+
+    saveUser(user) {
+        window.sessionStorage.removeItem(AppConstants.USER_KEY);
+        window.sessionStorage.setItem(AppConstants.USER_KEY, JSON.stringify(user));
+    }
+
+    getUser(): Usuario {
+        return JSON.parse(sessionStorage.getItem(AppConstants.USER_KEY));
+    }
+}
+</file>
+
+<file path="src/app/model/campos-pesquisa.ts">
+export interface CamposPesquisa {
+    id:    number;
+    campo: string;
+    nome:  string;
+}
+</file>
+
+<file path="src/app/model/cracha.ts">
+export interface Cracha {
+    id       : string;
+    matricula: string;
+    cargo: string;
+    nomeCracha: string;
+    nomeCompleto: string;
+    dataSolicitacao: Date;
+    dataEntrega: Date;
+	dataimpressao: Date;
+	titulo: string;
+    foto: Blob;
+}
+</file>
+
+<file path="src/app/model/pagination/content.ts">
+export interface Content {
+    matricula: string
+    cargo: any
+    nomeCracha: string
+    nomeCompleto: string
+    titulo: string
+    foto: string
+  }
+</file>
+
+<file path="src/app/model/pagination/page-root.ts">
+import { Content } from './content';
+import { Pageable } from './pageable';
+import { RootSort } from './root-sort';
+
+export interface PageRoot {
+  content: Content[]
+  pageable: Pageable
+  last: boolean
+  totalElements: number
+  totalPages: number
+  size: number
+  number: number
+  sort: RootSort
+  first: boolean
+  numberOfElements: number
+  empty: boolean
+}
+</file>
+
+<file path="src/app/model/pagination/pageable-sort.ts">
+export interface PageableSort {
+    empty: boolean
+    sorted: boolean
+    unsorted: boolean
+  }
+</file>
+
+<file path="src/app/model/pagination/pageable.ts">
+import { Sort } from './sort';
+
+export interface Pageable {
+  sort: Sort
+  offset: number
+  pageNumber: number
+  pageSize: number
+  paged: boolean
+  unpaged: boolean
+}
+</file>
+
+<file path="src/app/model/pagination/root-sort.ts">
+export interface RootSort {
+    empty: boolean
+    sorted: boolean
+    unsorted: boolean
+  }
+</file>
+
+<file path="src/app/model/pagination/sort.ts">
+export interface Sort {
+    empty: boolean
+    sorted: boolean
+    unsorted: boolean
+  }
+</file>
+
+<file path="src/app/model/toast-event.ts">
+import { EventTypes } from "../enums/event-types";
+
+export interface ToastEvent {
+    type: EventTypes;
+    title: string;
+    message: string;
+  }
+</file>
+
+<file path="src/app/model/usuario.ts">
+export interface Usuario {
+    login: string;
+    password: string;
+    roles?: string[];
+    token?: string;
+    nomeCompleto?: string;
+    email?: string;
+    comissao?: number;
+  }
+  
+  export interface LoginResponse {
+    token: string;
+    roles: string[];
+    nomeCompleto: string;
+    email: string;
+    comissao: number;
+  }
+</file>
+
+</files>

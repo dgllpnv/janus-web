@@ -1,0 +1,7 @@
+.altura-pagina {
+    min-height:calc(90vh - 40px);
+}
+
+.margin-negativa-5 {
+    margin-left: -5%;
+}
