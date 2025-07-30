@@ -2,6 +2,17 @@
 
 Este repositório contém um backend em Spring Boot destinado a automatizar o login no sistema PJe (Primeiro Grau) mantendo a sessão ativa para utilizações posteriores.
 
+## Requisitos
+
+- **Java 17** instalado e configurado no `PATH`;
+- **Node.js 18** com o gerenciador `npm`;
+- Acesso à internet aos repositórios Maven Central e npm para baixar dependências na primeira compilação.
+
+Para compilar sem rede é preciso que as dependências já estejam em cache. Execute
+`./mvnw dependency:go-offline` e `npm install` com acesso à internet uma vez.
+Depois utilize `./mvnw -o` e `npm ci --offline` (ou um registry local) para
+realizar builds offline.
+
 ## Como executar o backend
 
 ```bash
@@ -10,6 +21,35 @@ cd backend
 ```
 
 O servidor iniciará na porta `8081`.
+
+## Como compilar o backend
+
+```bash
+cd backend
+./mvnw clean package
+```
+
+## Como testar o backend
+
+```bash
+cd backend
+./mvnw test
+```
+
+## Como compilar o frontend
+
+```bash
+cd frontend
+npm install
+npm run build
+```
+
+## Como testar o frontend
+
+```bash
+cd frontend
+npm test
+```
 
 ## Fluxo de autenticação
 
