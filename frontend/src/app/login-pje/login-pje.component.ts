@@ -81,7 +81,8 @@ export class LoginPjeComponent {
             this.loading = false;
           });
 
-      } else if (res.sucesso || res.ok) {
+      } else if (res.redirectUrl) {
+        // Login concluído sem necessidade de 2FA
         this.logs.push('✅ Login realizado com sucesso.');
         this.etapa = 'finalizado';
         this.loading = false;
