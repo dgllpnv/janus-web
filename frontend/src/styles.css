@@ -1,0 +1,120 @@
+@import "~bootstrap/dist/css/bootstrap.css" ;
+
+/* You can add global styles to this file, and also import other style files */
+@media only screen and (max-width: 600px) {
+    .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
+        margin-top: 0.25rem !important;
+        width: 100%;
+    }
+
+    .row {
+      margin-top: 0rem !important;
+    }
+
+    #labelAcessoRede, #checkAcessoRede {
+        float: left !important;
+    }
+
+    html, body {
+      font-size: 13px !important;      
+    }
+    
+  }
+
+html, body {
+  background-image: url('/assets/images/brasao-azul-trans-4p.png');
+  background-repeat: repeat;
+  height: 100vh;
+}
+
+table thead {
+  background-color: #005E7A !important;
+  text-align: center;
+  color: white;
+}
+
+textarea {
+  resize: none;
+}
+
+.container {
+  min-height:calc(90vh - 48px);
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  padding-left: 0.5rem;
+}
+
+.float-right {
+  float: right !important;
+}
+
+.ml-2 {
+  margin-left: 1rem;
+}
+
+.ml-4 {
+  margin-left: 2rem;
+}
+
+.w-10 {
+  width: 10% !important;
+}
+
+.w-13 {
+  width: 13% !important;
+}
+
+.w-30 {
+  width: 30% !important;
+}
+.w-35 {
+  width: 35% !important;
+}
+
+.footer-bottom {
+  width: 100%;
+  right: 0;
+  bottom: 0;
+  left: 0;  
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.button-primary {
+  background-color: #005E7A !important;
+  border-color: white;
+  width: 94px;
+}
+
+.button-primary:hover {
+  color: var(--bs-btn-hover-color);
+  background-color: #005E7A !important;
+  border-color: var(--bs-btn-hover-border-color);
+}
+
+.font-weight-600 {
+  font-weight: 600 !important;
+}
+
+.table > :not(caption) > * > * {
+  padding: 0.4rem 0.4rem !important;
+}
+
+nav {
+  width: 100%;
+  height: 80px;
+  background-color: #005E7A;
+  background-image: url('/assets/images/bg-topo-principal.png');
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: right top;
+  padding: 8px 16px 8px 16px;
+}
+
+.altura-home {
+  min-height:calc(90vh - 37px);
+}
