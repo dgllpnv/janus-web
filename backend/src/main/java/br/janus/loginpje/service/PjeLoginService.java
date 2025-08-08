@@ -1,3 +1,4 @@
+// 📄 src/main/java/br/janus/loginpje/service/PjeLoginService.java
 package br.janus.loginpje.service;
 
 import org.jsoup.Jsoup;
@@ -8,8 +9,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class PjeLoginService {
 
-    private final OkHttpClient client = new OkHttpClient();
+    private final OkHttpClient client;
     private String viewState = "";
+
+    public PjeLoginService(OkHttpClient client) {
+        this.client = client; // <-- agora é singleton com CookieJar
+    }
 
     public void iniciarSessao() {
         try {
@@ -19,22 +24,16 @@ public class PjeLoginService {
                     .get()
                     .build();
 
-            Response response = client.newCall(request).execute();
-
-            if (!response.isSuccessful()) {
-                throw new RuntimeException("Erro ao acessar página de login: HTTP " + response.code());
+            try (Response response = client.newCall(request).execute()) {
+                if (!response.isSuccessful()) {
+                    throw new RuntimeException("Erro ao acessar página de login: HTTP " + response.code());
+                }
+                String html = response.body().string();
+                Document doc = Jsoup.parse(html);
+                viewState = doc.select("input[name=javax.faces.ViewState]").val();
             }
-
-            String html = response.body().string();
-            Document doc = Jsoup.parse(html);
-            viewState = doc.select("input[name=javax.faces.ViewState]").val();
-
-            System.out.println("✅ ViewState capturado com sucesso: " + viewState);
-
         } catch (Exception e) {
-            System.err.println("❌ Erro ao iniciar sessão no PJe:");
-            e.printStackTrace();
-            throw new RuntimeException("Erro ao iniciar sessão no PJe: " + e.getMessage());
+            throw new RuntimeException("Erro ao iniciar sessão no PJe: " + e.getMessage(), e);
         }
     }
 
@@ -54,18 +53,19 @@ public class PjeLoginService {
                     .post(form)
                     .build();
 
-            Response response = client.newCall(request).execute();
-            String html = response.body().string();
-
-            System.out.println("🔐 Resposta do login: " + html.substring(0, Math.min(500, html.length())) + "...");
-
-            // Se HTML contiver a tela de código (autenticação secundária)
-            return html.contains("formAutenticacaoCodigo");
-
+            try (Response response = client.newCall(request).execute()) {
+                String html = response.body().string();
+                // Atualiza ViewState quando a página troca (JSF gera novo token)
+                Document doc = Jsoup.parse(html);
+                String newViewState = doc.select("input[name=javax.faces.ViewState]").val();
+                if (newViewState != null && !newViewState.isBlank()) {
+                    viewState = newViewState;
+                }
+                // Retorna true se exigir 2FA
+                return html.contains("formAutenticacaoCodigo") || html.contains("kc-form-login");
+            }
         } catch (Exception e) {
-            System.err.println("❌ Erro ao enviar credenciais:");
-            e.printStackTrace();
-            throw new RuntimeException("Erro na autenticação: " + e.getMessage());
+            throw new RuntimeException("Erro na autenticação: " + e.getMessage(), e);
         }
     }
 
@@ -83,17 +83,18 @@ public class PjeLoginService {
                     .post(form)
                     .build();
 
-            Response response = client.newCall(request).execute();
-            String html = response.body().string();
-
-            System.out.println("📩 Resposta da verificação de código: " + html);
-
-            return response.isSuccessful() && html.contains("painel-usuario-interno");
-
+            try (Response response = client.newCall(request).execute()) {
+                String html = response.body().string();
+                // Atualiza ViewState
+                Document doc = Jsoup.parse(html);
+                String newViewState = doc.select("input[name=javax.faces.ViewState]").val();
+                if (newViewState != null && !newViewState.isBlank()) {
+                    viewState = newViewState;
+                }
+                return response.isSuccessful() && html.contains("painel-usuario-interno");
+            }
         } catch (Exception e) {
-            System.err.println("❌ Erro ao validar código:");
-            e.printStackTrace();
-            throw new RuntimeException("Erro ao validar código: " + e.getMessage());
+            throw new RuntimeException("Erro ao validar código: " + e.getMessage(), e);
         }
     }
 }
